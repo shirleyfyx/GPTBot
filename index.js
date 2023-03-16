@@ -9,17 +9,20 @@ const client = new Client({ intents : [
     GatewayIntentBits.MessageContent
 ]})
 
-// // Prepare connection to OpenAI API.
-// const { Configuration , OpenAIApi } = require('openai');
-// const configuration = new Configuration({
-//     organization: process.env.OPENAI_ORG,
-//     apiKey: process.env.OPENAI_KEY,
-// });
-// const openai = new OpenAIApi(configuration);
+// Prepare connection to OpenAI API.
+const { Configuration , OpenAIApi } = require('openai');
+const configuration = new Configuration({
+    organization: process.env.OPENAI_ORG,
+    apiKey: process.env.OPENAI_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 // Check for when a message on Discord is sent.
 client.on('messageCreate', async function(message){
     try {
+        // DO not repeat to yourself or other bots.
+        if(message.author.bot) return;
+        
         console.log(message.content);
         message.reply(`You said: ${message.content}`);
     } catch(err){
