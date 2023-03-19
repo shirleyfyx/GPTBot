@@ -22,9 +22,20 @@ client.on('messageCreate', async function(message){
     try {
         // DO not repeat to yourself or other bots.
         if(message.author.bot) return;
-        
-        console.log(message.content);
-        message.reply(`You said: ${message.content}`);
+
+        const gptResponse = await openai.createCompletion({
+            model: "davinci",
+            prompt: `ChatGPT is a friendly chatbot. \n\
+            ChatGPT: Hello, how are you? \n\
+            ${message.author.username}: ${message.content} \n\
+            ChatGPT: `,
+            temperature: 1,
+            max_tokens: 100,
+            stop: ["ChatGPT:","Shirley Fang:"],
+        })
+
+        message.reply(`${gptResponse.data.choices[0].text}`);
+        return;
     } catch(err){
         console.log(err)
     }
