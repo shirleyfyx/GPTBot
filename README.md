@@ -1,4 +1,4 @@
-# GPTBot :hugs:
+# FAQ Discord Bot :hugs:
 This is a simple Discord bot that uses the OpenAI API to interact with users on a Discord server. 
 <p> The bot will respond to messages from users on the server, using the OpenAI API to generate a response based on the input message.
 
